@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @author Gilad Hatav Idus <gilad@idus.co.il>
+ */
+
+if($this->getEnabled()){
+$jobs  = $this->getAllJobs();
+?>
+
+<?if($content = $this->getContent()){?>
+	<div class="job_content"><?=$content?></div>
+<?}?>
+<div class="job_list" data-mage-init='{"idus_jobs_list":{}}'>
+	<div class="free_text field">
+		<input id="search_job_free_text" type="text" class="input-text" placeholder="<?=__('Free text')?>">
+	</div>
+	<div class="job_areas">
+		<label for="job_select_area"><?=__('מציג לפי')?> : </label>
+		<select class="areas">
+			<option class="first" id="job_select_area" value="0" title="<?=__('כל האזורים')?>"><?=__('כל האזורים')?></option>
+			<?foreach ($block->getAllAreas() as $area){?>
+				<option class="<?=substr(md5($area),0,5)?>" title="<?=$area?>" value="<?=substr(md5($area),0,5)?>"><?=$area?></option>
+			<?}?>
+		</select>
+	</div><div class="job_citis">
+		<label for="job_select_citis"><?=__('מציג לפי')?> : </label>
+		<select class="citis">
+			<option class="first" id="job_select_citis" value="0" title="<?=__('כל הישובים')?>"><?=__('כל הישובים')?></option>
+			<?foreach ($block->getAllCitis() as $city => $area) {?>
+				<option class="<?=substr(md5($area),0,5)?>" title="<?=$city?>" value="<?=substr(md5($city),0,5)?>"><?=$city?></option>
+			<?}?>
+		</select>
+	</div>
+</div>
+
+<div class="job_count">
+	<?=__('נמצאו').' <span>'.count($jobs).'</span> '.__('משרות')?>
+</div>
+
+<div class="locating">
+	<div class="loading">
+		<span class="cloc"><?=__('מאתר מיקום')?>...</span>
+	</div>
+</div>
+<script language="javascript" type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&v=3&libraries=geometry&language=iw"></script>
+
+<ul class="jobs" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false, "animate":{"easing": "easeOutExpo", "duration":"400"}}}'><?
+	foreach($jobs as $job){
+		?><li class="job city_<?=$city = substr(md5($job->getCity()), 0,5)?> area_<?=$area = substr(md5($job->getArea()), 0,5)?>" data-latitude="<?=$job->getLatitude()?>" data-longitude="<?=$job->getLongitude()?>" data-city="<?=$city?>" data-area="<?=$area?>">
+			<div class="title" data-role="collapsible"><span data-role="trigger"><?=$job->getTitle()?></span><span class="code"><?=$job->getCode()?></span></div>
+			<div class="content" data-role="content" style="display: none;"><?=$this->getJobHtml($job,'list');?></div>
+		</li><?
+	}
+?></ul>
+<style type="text/css">
+	.area_hide,.city_hide,.free_text_hide{
+		display: none;
+	}
+</style>
+<?}?>

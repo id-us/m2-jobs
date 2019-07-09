@@ -1,0 +1,7 @@
+<?
+$job = $this->getJob();
+$var = $block->getVariable();
+if(!$var)return;
+?><div class="job_custom_<?=$var?>">
+	<span><?=$job->getData($var)?></span>
+</div>

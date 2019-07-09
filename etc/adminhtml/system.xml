@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Idus.in. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="jobs" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Jobs</label>
+            <tab>idus</tab> <!-- Add the section in idus core tab -->
+            <resource>Idus_Jobs::settings</resource>
+            <group id="jobs" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Jobs</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment>Display Jobs</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url_key" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                    <label>Url key</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="url_key_job" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                    <label>Url key Job</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="content" translate="label comment" sortOrder="30" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Content Editor</label>
+                    <frontend_model>Idus\Core\Model\Config\Source\Editor</frontend_model>
+                    <comment>Type a message to show the customers. You can include HTML tags like p, a, div, span.</comment>
+                </field>
+
+                <field id="layout_list" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout List</label>
+                    <frontend_model>Idus\Jobs\Block\System\Form\Field\Elements</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="layout_view" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout View</label>
+                    <frontend_model>Idus\Jobs\Block\System\Form\Field\Elements</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+       </section>
+    </system>
+</config>

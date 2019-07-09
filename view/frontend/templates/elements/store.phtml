@@ -1,0 +1,8 @@
+<?
+$job = $this->getJob();
+$var = $block->getVariable();
+if(!$value = $job->getData('store_'.$var)) $value = $job->getData($var);
+if(!$value) return;
+?><div class="job_store_data_<?=$var?>">
+	<span><?=$value?></span>
+</div>

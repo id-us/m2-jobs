@@ -1,0 +1,7 @@
+<?
+$job = $this->getJob();
+$var = $block->getVariable();
+?><div class="job_code">
+	<?if($var){?><p class="title"><?=$var?></p><?}?>
+	<span><?=$job->getCode()?></span>
+</div>

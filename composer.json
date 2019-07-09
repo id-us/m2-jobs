@@ -1,0 +1,25 @@
+{
+    "name": "idus/jobs",
+    "description": "Copyright © id•us agency ltd. All rights reserved.",
+    "require": {
+        "php": "~5.6.0|7.0.2|7.0.4|~7.0.6|~7.1.0|~7.1.3|~7.2.0|~7.0.3"
+    },
+    "type": "magento2-module",
+    "version": "19.06.30",
+    "authors": [
+        {
+            "name": "Pinky and The Brain",
+            "email": "support@idus.co.il",
+            "homepage": "https://www.idus.co.il/",
+            "role": "World Dominators"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Idus\\Jobs\\": ""
+        }
+    }
+}

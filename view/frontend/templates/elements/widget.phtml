@@ -1,0 +1,9 @@
+<?
+$job = $this->getJob();
+$block->idus()->setGlobalValue('object',$job);
+$var = $block->getVariable();
+if(!$content = trim($block->idus()->getContentHtml($var))) return;
+$block->idus()->setGlobalValue('object',false);
+?><div class="job_widget">
+	<?=$content?>
+</div>
