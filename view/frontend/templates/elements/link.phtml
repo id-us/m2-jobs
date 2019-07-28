@@ -3,5 +3,9 @@ $job = $this->getJob();
 $var = $block->getVariable();
 if(!$var)$var = __('לפרטי המשרה');
 ?><div class="link_job">
-	<a class="action" aria-label="<?=$var?>" href="<?=$block->getJobUrl($job->getId())?>"><?=$var?></a>
+	<a class="action" aria-label="<?=$var?>" href="<?=$block->getJobUrl($job->getId())?>">
+		<span>
+			<?=$var?>
+		</span>
+	</a>
 </div>
