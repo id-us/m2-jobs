@@ -18,26 +18,56 @@
                     <comment>Display Jobs</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="url_key" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                
+                <group id="seo" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SEO</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+
+                    <field id="jobs_title" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label" type="text">
+                        <label>Jobs Title</label>
+                    </field>
+                    
+                    <field id="jobs_description" translate="label comment" sortOrder="20" type="textarea" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Jobs  Description</label>
+                    </field>
+
+                    <field id="job_title" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                        <label>Job Title</label>
+                        <comment>%job% = job name</comment>
+                    </field>
+                    <field id="job_description" translate="label comment" sortOrder="40" type="textarea" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Job Description</label>
+                        <comment>%job% = job name</comment>
+                    </field>
+
+                </group>
+
+
+                <field id="url_key" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="30" translate="label" type="text">
                     <label>Url key</label>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="url_key_job" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                <field id="url_key_job" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="40" translate="label" type="text">
                     <label>Url key Job</label>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
                 
-                <field id="content" translate="label comment" sortOrder="30" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="content" translate="label comment" sortOrder="50" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Content Editor</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
                     <frontend_model>Idus\Core\Model\Config\Source\Editor</frontend_model>
                     <comment>Type a message to show the customers. You can include HTML tags like p, a, div, span.</comment>
                 </field>
 
-                <field id="layout_list" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="layout_list" translate="label" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Layout List</label>
                     <frontend_model>Idus\Jobs\Block\System\Form\Field\Elements</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
@@ -45,7 +75,7 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="layout_view" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="layout_view" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Layout View</label>
                     <frontend_model>Idus\Jobs\Block\System\Form\Field\Elements</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>

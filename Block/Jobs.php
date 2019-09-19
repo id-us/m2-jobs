@@ -35,10 +35,33 @@ class Jobs extends \Magento\Framework\View\Element\Template
     
     public function _prepareLayout()
     {
-        $title = __('דרושים');
-        if($job = $this->getJob()) $title = __('משרה').' '.$job->getTitle();
+
+        if($job = $this->getJob()){
+
+            if(isset($this->config['seo']) && isset($this->config['seo']['job_title']) && trim($this->config['seo']['job_title']) != ''){
+                $title = str_replace('%job%',$job->getTitle(),$this->config['seo']['job_title']);
+                $description = str_replace('%job%',$job->getTitle(),$this->config['seo']['job_description']);
+            }else{
+                $title = __('משרה').' '.$job->getTitle();
+                $description = false;
+            }
+
+        }else{
+
+            if(isset($this->config['seo']) && isset($this->config['seo']['jobs_title']) && trim($this->config['seo']['jobs_title']) != ''){
+                $title = $this->config['seo']['jobs_title'];
+                $description = $this->config['seo']['jobs_description'];
+
+            }else{
+                $title = __('דרושים');
+                $description = false;
+            }
+
+        }
 
         $this->pageConfig->getTitle()->set($title);
+        if($description) $this->pageConfig->setDescription($description);
+
         return parent::_prepareLayout();
     }
 
