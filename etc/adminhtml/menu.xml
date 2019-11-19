@@ -2,8 +2,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
     <menu>
     	<add id="Idus_Jobs::jobs" title="Jobs" translate="title" module="Idus_Jobs" sortOrder="30" parent="Idus_Core::idus" resource="Idus_Jobs::jobs"/>
-        <add id="Idus_Jobs::jobs_jobs" title="Data" module="Idus_Jobs" sortOrder="1" parent="Idus_Jobs::jobs" action="jobs/jobs" resource="Idus_Jobs::jobs_jobs"/>
-        <add id="Idus_Jobs::settings" title="Settings" module="Idus_Jobs" sortOrder="2" parent="Idus_Jobs::jobs" action="adminhtml/system_config/edit/section/jobs" resource="Idus_Jobs::setting"/>
+        <add id="Idus_Jobs::data" title="Data" module="Idus_Jobs" sortOrder="1" parent="Idus_Jobs::jobs" action="jobs/jobs" resource="Idus_Jobs::data"/>
+        <add id="Idus_Jobs::config" title="Config" module="Idus_Jobs" sortOrder="2" parent="Idus_Jobs::jobs" action="adminhtml/system_config/edit/section/jobs" resource="Idus_Jobs::config"/>
         <add id="Idus_Jobs::import" title="Import" module="Idus_Jobs" sortOrder="3" parent="Idus_Jobs::jobs" action="adminhtml/import" resource="Idus_Jobs::import"/>
     </menu>
 </config>
