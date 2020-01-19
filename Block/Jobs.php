@@ -119,7 +119,13 @@ class Jobs extends \Magento\Framework\View\Element\Template
         $collection->join(
                         ['stores' => $collection->getTable('idus_storelocator')],
                         'main_table.store = stores.code',
-                        ['store_title' => 'stores.title', 'store_code' => 'stores.code', 'store_is_active' => 'stores.is_active']
+                        [
+                            'store_title' => 'stores.title',
+                            'store_code' => 'stores.code',
+                            'store_is_active' => 'stores.is_active',
+                            'city' => 'stores.city',
+                            'area' => 'stores.area'
+                        ]
                     );
 
         $this->_getAllJobs = $collection;

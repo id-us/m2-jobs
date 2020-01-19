@@ -10,12 +10,10 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Idus_Core::idus">
-                    <resource id="Idus_Core::configuration">
-                        <resource id="Idus_Jobs::jobs" title="Jobs" translate="title">
-                            <resource id="Idus_Jobs::data" title="Data" translate="title" />
-                            <resource id="Idus_Jobs::config" title="Config" translate="title" />
-                            <resource id="Idus_Jobs::import" title="Import" translate="title" />
-                        </resource>
+                    <resource id="Idus_Jobs::jobs" title="Jobs" translate="title">
+                        <resource id="Idus_Jobs::data" title="Data" translate="title" />
+                        <resource id="Idus_Jobs::config" title="Config" translate="title" />
+                        <resource id="Idus_Jobs::import" title="Import" translate="title" />
                     </resource>
                 </resource>
             </resource>
