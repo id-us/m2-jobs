@@ -48,7 +48,9 @@ $jobs  = $this->getAllJobs();
 <ul class="jobs" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false, "animate":{"easing": "easeOutExpo", "duration":"400"}}}'><?
 	foreach($jobs as $job){
 		?><li class="job city_<?=$city = substr(md5($job->getCity()), 0,5)?> area_<?=$area = substr(md5($job->getArea()), 0,5)?>" data-latitude="<?=$job->getLatitude()?>" data-longitude="<?=$job->getLongitude()?>" data-city="<?=$city?>" data-area="<?=$area?>">
-			<div class="title" data-role="collapsible"><span data-role="trigger"><?=$job->getTitle()?></span><span class="code"><?=$job->getCode()?></span></div>
+			<div data-role="trigger">
+				<span><?=$job->getTitle()?></span><span class="code"><?=$job->getCode()?></span>
+			</div>
 			<div class="content" data-role="content" style="display: none;"><?=$this->getJobHtml($job,'list');?></div>
 		</li><?
 	}
