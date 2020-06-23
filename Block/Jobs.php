@@ -115,10 +115,10 @@ class Jobs extends \Magento\Framework\View\Element\Template
         if(isset($this->_getAllJobs))return $this->_getAllJobs;
         $collection = $this->_jobsFactory->create()->getCollection();
         $collection->addFieldToSelect('*');
-        $collection->addFieldToFilter('main_table.is_active' ,1 );
+        $collection->addFieldToFilter('main_table.is_active', 1);
         $collection->join(
                         ['stores' => $collection->getTable('idus_storelocator')],
-                        'main_table.store = stores.code',
+                        'main_table.store = stores.code AND stores.is_active = 1 AND NOT ( stores.shipping = 1 AND stores.storelocator = 0 )',
                         [
                             'store_title' => 'stores.title',
                             'store_code' => 'stores.code',
@@ -127,6 +127,7 @@ class Jobs extends \Magento\Framework\View\Element\Template
                             'area' => 'stores.area'
                         ]
                     );
+        $collection->getSelect()->group('main_table.job_id');
 
         $this->_getAllJobs = $collection;
         return $this->_getAllJobs;
