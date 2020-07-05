@@ -207,7 +207,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl()
     {
-        return $this->getUrl('jobs/*/grid', ['_current' => true]);
+        return $this->getUrl('jobs/*/index', ['_current' => true]);
     }
 
     /**
