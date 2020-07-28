@@ -35,7 +35,10 @@ $jobs  = $this->getAllJobs();
 </div>
 
 <div class="job_count">
-	<div><?=__('נמצאו').' <span>'.count($jobs).'</span> '.__('משרות')?></div>
+	<div <?= (count($jobs) === 0 ? 'class="empty"' : '')?>><?=__('נמצאו').' <span>'.count($jobs).'</span> '.__('משרות')?></div>
+	<? if (count($jobs) === 0) { ?>
+		<div class="empty-notice"><?= __('אין משרות פנויות') ?></div>
+	<? } ?>
 </div>
 
 <div class="locating">
