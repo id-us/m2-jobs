@@ -44,6 +44,10 @@
 
                 </group>
 
+                <field id="use_store_brand" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="25" translate="label" type="select">
+                    <label>Use store brand for Jobs</label>
+                    <source_model>Idus\Jobs\Block\System\Form\Field\Brands</source_model>
+                </field>
 
                 <field id="url_key" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="30" translate="label" type="text">
                     <label>Url key</label>

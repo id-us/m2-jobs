@@ -42,12 +42,14 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         \Idus\Jobs\Model\JobsFactory $jobsFactory,
         \Idus\Storelocator\Model\StoresFactory $storesFactory,
         \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig,
+        \Idus\Core\Helper\Data $idus,
         array $data = []
     ){
         $this->_systemStore = $systemStore;
         $this->wysiwyg = $wysiwygConfig->getConfig();
         $this->_jobsFactory = $jobsFactory;
         $this->_storesFactory = $storesFactory;
+        $this->idus = $idus;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -212,6 +214,8 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
     public function getStoreArray(){
         $stores = array();
         $collection = $this->_storesFactory->create()->getCollection();
+        $filterByBrand = $this->idus->getConfigValue('jobs/jobs/use_store_brand');
+        if (!empty($filterByBrand)) $collection->addFieldToFilter('brand', $filterByBrand);
         $stores[''] = __('-- Select Store --');
         foreach($collection as $store){
             $stores[$store->getCode()] = $store->getTitle();
