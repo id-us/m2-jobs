@@ -118,7 +118,7 @@ class Jobs extends \Magento\Framework\View\Element\Template
         $collection->addFieldToFilter('main_table.is_active', 1);
         $collection->join(
                         ['stores' => $collection->getTable('idus_storelocator')],
-                        'main_table.store = stores.code AND stores.is_active = 1 AND NOT ( stores.shipping = 1 AND stores.storelocator = 0 )',
+                        'main_table.store = stores.code AND stores.is_active = 1',
                         [
                             'store_title' => 'stores.title',
                             'store_code' => 'stores.code',
