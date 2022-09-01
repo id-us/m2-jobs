@@ -72,19 +72,30 @@ class Jobs extends \Magento\Framework\View\Element\Template
         return false;
     }
 
-    public function getAllCitis(){
+    public function getAllCitis() {
         $citis = array();
         foreach ($this->getAllJobs() as $key => $job) {
-            $citis[$job->getCity()] = $job->getArea();
+
+            $jobCities = explode(',', $job->getCity());
+            $jobAreas = explode(',', $job->getArea());
+            foreach ($jobCities as $k => $jobCity) {
+
+                $citis[$jobCity] = $jobAreas[$k] ?? $job->getArea();
+            }
         }
         asort($citis);
         return $citis;
     }
 
-    public function getAllAreas(){
+    public function getAllAreas() {
         $areas = array();
         foreach ($this->getAllJobs() as $key => $job) {
-            $areas[$job->getArea()] = $job->getArea();
+
+            $jobAreas = explode(',', $job->getArea());
+            foreach ($jobAreas as $jobArea) {
+
+                $areas[$jobArea] = $jobArea;
+            }
         }
         asort($areas);
         return $areas;
@@ -109,27 +120,76 @@ class Jobs extends \Magento\Framework\View\Element\Template
         return $this->_getJob[$job_id] = $collection->getFirstItem();
     }
 
+    public function getAllJobs() {
 
-
-    public function getAllJobs(){
-        if(isset($this->_getAllJobs))return $this->_getAllJobs;
+        if (isset($this->_getAllJobs)) return $this->_getAllJobs;
         $collection = $this->_jobsFactory->create()->getCollection();
         $collection->addFieldToSelect('*');
         $collection->addFieldToFilter('main_table.is_active', 1);
-        $collection->join(
-                        ['stores' => $collection->getTable('idus_storelocator')],
-                        'main_table.store = stores.code AND stores.is_active = 1',
-                        [
-                            'store_title' => 'stores.title',
-                            'store_code' => 'stores.code',
-                            'store_is_active' => 'stores.is_active',
-                            'city' => 'stores.city',
-                            'area' => 'stores.area'
-                        ]
-                    );
         $collection->getSelect()->group('main_table.job_id');
+
+        $storesToFetch = [];
+        foreach ($collection as $job) {
+
+            $jobStores = explode(',', $job->getStore());
+            $storesToFetch = array_merge($storesToFetch, $jobStores);
+        }
+
+        $storesCollection = $this->_storesFactory->create()->getCollection();
+        $storesCollection->addFieldToSelect(['title', 'code', 'city', 'area']);
+        $storesCollection->addFieldToFilter('code', ['in' => $storesToFetch]);
+
+        $storesByCode = [];
+        foreach ($storesCollection as $store) {
+
+            $storesByCode[$store->getCode()] = $store->getData();
+        }
+
+        foreach ($collection as $job) {
+
+            $jobStores = explode(',', $job->getStore());
+
+            $jobCities = [];
+            $jobAreas = [];
+            foreach ($jobStores as $jobStore) {
+
+                $jobCities[] = $storesByCode[$jobStore]['city'];
+                $jobAreas[] = $storesByCode[$jobStore]['area'];
+            }
+
+            $job->setCity(implode(',', $jobCities));
+            $job->setArea(implode(',', $jobAreas));
+        }
 
         $this->_getAllJobs = $collection;
         return $this->_getAllJobs;
+    }
+
+    public function getJobCityClass($job) {
+
+        $cities = explode(',', $job->getCity());
+
+        $cityClass = [];
+
+        foreach ($cities as $city) {
+
+            $cityClass[] = 'city_' . substr(md5($city), 0, 5);
+        }
+
+        return implode(' ', $cityClass);
+    }
+
+    public function getJobAreasClass($job) {
+
+        $areas = explode(',', $job->getArea());
+
+        $areasClass = [];
+
+        foreach ($areas as $area) {
+
+            $areasClass[] = 'area_' . substr(md5($area), 0, 5);
+        }
+
+        return implode(' ', $areasClass);
     }
 }
