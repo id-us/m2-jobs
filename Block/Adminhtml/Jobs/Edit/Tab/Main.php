@@ -103,12 +103,12 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
 
         $fieldset->addField(
             'store',
-            'select',
+            'multiselect',
             [
                 'name' => 'store',
                 'label' => __('Store'),
                 'title' => __('Store'),
-                'options' => $this->getStoreArray(),
+                'values' => $this->getStoreArray(),
                 'required' => true,
                 'disabled' => $isElementDisabled
             ]
@@ -216,9 +216,13 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         $collection = $this->_storesFactory->create()->getCollection();
         $filterByBrand = $this->idus->getConfigValue('jobs/jobs/use_store_brand');
         if (!empty($filterByBrand)) $collection->addFieldToFilter('brand', $filterByBrand);
-        $stores[''] = __('-- Select Store --');
         foreach($collection as $store){
-            $stores[$store->getCode()] = $store->getTitle();
+            
+            $stores[] = [
+
+                'value' => $store->getCode(),
+                'label' => $store->getTitle()
+            ];
         }
         return $stores;
     }
