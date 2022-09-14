@@ -37,6 +37,8 @@ class Save extends \Magento\Backend\App\Action
 				$model->load($id);
 			}
 
+			if (is_array($data['store'])) $data['store'] = implode(',', $data['store']);
+
 			$model->setData($data);
 
 			try {
