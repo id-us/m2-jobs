@@ -115,7 +115,8 @@ class Jobs extends \Magento\Framework\View\Element\Template
         if(isset($this->_getJob[$job_id]))return $this->_getJob[$job_id];
         
         if(!$job_id) return $this->_getJob[$job_id] = false;
-        $collection = $this->getAllJobs();
+        $collection = $this->_jobsFactory->create()->getCollection();
+        $collection->addFieldToFilter('is_active', 1);
         $collection->addFieldToFilter('job_id' ,$job_id );
         return $this->_getJob[$job_id] = $collection->getFirstItem();
     }
