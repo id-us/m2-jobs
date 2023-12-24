@@ -6,10 +6,18 @@ class Router implements \Magento\Framework\App\RouterInterface
 {
     const ROUTE = 'jobs';
     const ROUTE_CHILD = 'job';
+    
+    protected $objectManager;
+    protected $idus;
+    protected $config;
+    protected $route;
+    protected $routeChild;
+
     /**
      * @var \Magento\Framework\App\ActionFactory
      */
-    protected $actionFactory;
+    
+
     /**
      * Response
      *
