@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="idus_get_additional_pages_sitemap">
+		<observer name="jobs.idus_get_additional_pages_sitemap" instance="Idus\Jobs\Observer\GetPages"/>
+ 	</event>
+</config>
