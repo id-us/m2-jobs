@@ -154,8 +154,8 @@ class Jobs extends \Magento\Framework\View\Element\Template
             $jobAreas = [];
             foreach ($jobStores as $jobStore) {
 
-                $jobCities[] = $storesByCode[$jobStore]['city'];
-                $jobAreas[] = $storesByCode[$jobStore]['area'];
+                $jobCities[] = @$storesByCode[$jobStore]['city'];
+                $jobAreas[] = @$storesByCode[$jobStore]['area'];
             }
 
             $job->setCity(implode(',', $jobCities));
